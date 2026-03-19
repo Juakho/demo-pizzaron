@@ -3,256 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú | El Tamaño Sí Importa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Carta PizzaRon | Pedidos al 9 8744 3238</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --rojo: #E63946;
-            --amarillo: #FFC300;
-            --negro-fondo: #111111;
-            --negro-card: #1c1c1c;
-            --blanco: #FFFFFF;
-            --gris: #b3b3b3;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--negro-fondo); color: var(--blanco); padding-bottom: 120px; scroll-behavior: smooth; }
+        :root { --negro: #0B0B0B; --rojo: #8B1E1E; --beige: #F5E6D3; --gris: #1c1c1c; --azul: #007AFF; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--negro); color: white; margin: 0; padding-bottom: 160px; }
         
-        /* NAVBAR CORREGIDA: Logo vuelve a la principal */
-        nav { background: #000; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1001; border-bottom: 3px solid var(--rojo); }
-        .logo-link { display: block; transition: transform 0.2s; }
+        /* HEADER CON LOGO NAVEGABLE */
+        header { background: var(--negro); padding: 20px; text-align: center; border-bottom: 2px solid var(--beige); position: sticky; top: 0; z-index: 1000; }
+        .logo-link { display: inline-block; transition: transform 0.2s; }
         .logo-link:hover { transform: scale(1.05); }
-        .logo-link img { height: 55px; display: block; }
-        .btn-inicio { background: var(--rojo); color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
+        .logo { height: 70px; cursor: pointer; }
 
-        /* Categorías */
-        .categorias-bar { 
-            background: #1a1a1a; display: flex; overflow-x: auto; padding: 15px; gap: 20px; 
-            position: sticky; top: 78px; z-index: 1000; scrollbar-width: none; border-bottom: 1px solid #333;
-        }
-        .cat-item { text-align: center; min-width: 95px; cursor: pointer; color: var(--gris); text-decoration: none; }
-        .cat-item i { font-size: 1.4rem; color: var(--rojo); display: block; margin-bottom: 5px; }
-        .cat-item span { font-size: 0.65rem; font-weight: bold; text-transform: uppercase; display: block; line-height: 1.2; }
+        .container { max-width: 800px; margin: auto; padding: 15px; }
+        h2 { font-family: 'Oswald'; color: var(--beige); text-transform: uppercase; border-bottom: 2px solid var(--rojo); padding-bottom: 5px; margin-top: 35px; }
 
-        .contenedor { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
-        .seccion-titulo { margin: 40px 0 15px; font-size: 1.4rem; color: var(--amarillo); border-left: 5px solid var(--rojo); padding-left: 15px; text-transform: uppercase; }
+        /* TABLA DE TAMAÑOS */
+        .tabla-precios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .precio-box { background: var(--gris); padding: 15px; border: 1px solid var(--beige); text-align: center; border-radius: 5px; }
+        .precio-box h3 { font-family: 'Oswald'; margin: 0; font-size: 1rem; color: var(--beige); }
+        .precio-box span { display: block; font-size: 1.2rem; font-weight: bold; margin: 5px 0; }
+        .precio-box small { font-size: 0.75rem; color: #aaa; display: block; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--negro-card); border-radius: 15px; padding: 20px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: space-between; }
-        .precio { color: var(--amarillo); font-weight: bold; font-size: 1.2rem; margin-bottom: 15px; display: block; }
-        .btn-add { background: var(--rojo); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; }
+        /* PIZZAS */
+        .pizza-card { background: var(--gris); padding: 15px; border-left: 5px solid var(--rojo); margin-bottom: 12px; }
+        .pizza-card strong { font-family: 'Oswald'; font-size: 1.1rem; color: var(--beige); text-transform: uppercase; }
+        .pizza-card p { margin: 5px 0 0; font-size: 0.9rem; color: #ddd; line-height: 1.4; }
 
-        #cart-float { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: var(--rojo); color: white; padding: 15px 30px; border-radius: 50px; display: flex; align-items: center; gap: 15px; cursor: pointer; z-index: 1002; border: 2px solid var(--amarillo); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        /* SECCIONES SIMPLES */
+        .item-simple { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333; font-size: 1rem; }
+        .grid-dos { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--negro-card); width: 90%; max-width: 450px; border-radius: 20px; padding: 25px; border: 1px solid var(--rojo); }
-        input, select { width: 100%; padding: 12px; background: #222; border: 1px solid var(--rojo); color: white; border-radius: 8px; margin-bottom: 15px; }
-        .btn-confirm { background: var(--rojo); color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        /* BOTÓN VOLVER */
+        .btn-volver { display: block; width: fit-content; margin: 40px auto; padding: 12px 30px; border: 1px solid var(--beige); color: var(--beige); text-decoration: none; font-family: 'Oswald'; text-transform: uppercase; transition: 0.3s; }
+        .btn-volver:hover { background: var(--beige); color: var(--negro); }
+
+        /* FOOTER DE LLAMADA */
+        .call-footer { position: fixed; bottom: 0; width: 100%; background: var(--negro); padding: 15px; border-top: 3px solid var(--beige); box-sizing: border-box; z-index: 1000; }
+        .btn-call { display: flex; align-items: center; justify-content: center; background: var(--azul); color: white; text-decoration: none; padding: 14px; border-radius: 8px; font-family: 'Oswald'; margin-bottom: 10px; font-size: 1.1rem; }
+        .btn-call.secundario { background: #444; }
+
+        .zona-reparto { background: var(--rojo); color: white; padding: 12px; text-align: center; font-size: 0.85rem; font-weight: bold; border-radius: 5px; margin-bottom: 25px; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo-link">
-            <img src="logo.png" alt="Logo Regresar">
-        </a>
-        <a href="index.html" class="btn-inicio"><i class="fas fa-home"></i> INICIO</a>
-    </nav>
+<header>
+    <a href="index.html" class="logo-link">
+        <img src="logo.png" class="logo" alt="Volver al Inicio">
+    </a>
+</header>
 
-    <div class="categorias-bar">
-        <a href="#promos" class="cat-item"><i class="fas fa-percentage"></i><span>Promociones</span></a>
-        <a href="#hamburguesas" class="cat-item"><i class="fas fa-hamburger"></i><span>Burgers</span></a>
-        <a href="#churrascos" class="cat-item"><i class="fas fa-bread-slice"></i><span>Churrascos</span></a>
-        <a href="#vienesas" class="cat-item"><i class="fas fa-hotdog"></i><span>Vienesas</span></a>
-        <a href="#as" class="cat-item"><i class="fas fa-grip-lines"></i><span>As</span></a>
-        <a href="#goliat" class="cat-item"><i class="fas fa-crown"></i><span>Goliat</span></a>
-        <a href="#picar" class="cat-item"><i class="fas fa-utensils"></i><span>Para Picar</span></a>
-        <a href="#veggie" class="cat-item"><i class="fas fa-leaf"></i><span>Carta Veggie</span></a>
-        <a href="#bebestibles" class="cat-item"><i class="fas fa-wine-glass-alt"></i><span>Bebestibles</span></a>
-        <a href="#junaeb" class="cat-item"><i class="fas fa-graduation-cap"></i><span>Menú JUNAEB</span></a>
+<div class="container">
+    
+    <div class="zona-reparto">
+        DELIVERY SOLO EN: PEÑAFLOR, PELVÍN, MALLOCO Y CAMINO DEL DIABLO
     </div>
 
-    <div class="contenedor">
-        <h2 id="promos" class="seccion-titulo">Promociones</h2>
-        <div class="grid">
-            <div class="card"><h3>2x Churrasco Italiano</h3><p>Carne, tomate, palta y mayo.</p><span class="precio">$7.490</span><button class="btn-add" onclick="abrirMayo('2x Churrasco Italiano', 7490)">Agregar</button></div>
+    <h2>1. PRECIOS POR TAMAÑO</h2>
+    <div class="tabla-precios">
+        <div class="precio-box">
+            <h3>MEDIANA</h3><span>$14.400</span><small>33 cm / 8 trozos</small>
         </div>
-
-        <h2 id="hamburguesas" class="seccion-titulo">Hamburguesas</h2>
-        <div class="grid">
-            <div class="card"><h3>ETSI Burger</h3><p>Queso, tocino, lechuga, tomate y mayo.</p><span class="precio">$6.500</span><button class="btn-add" onclick="abrirMayo('ETSI Burger', 6500)">Agregar</button></div>
+        <div class="precio-box">
+            <h3>FAMILIAR</h3><span>$16.400</span><small>38 cm / 12 trozos</small>
         </div>
-
-        <h2 id="churrascos" class="seccion-titulo">Churrascos</h2>
-        <div class="grid">
-            <div class="card"><h3>Churrasco Italiano</h3><p>Lomo, tomate, palta y mayo.</p><span class="precio">$4.500</span><button class="btn-add" onclick="abrirMayo('Churrasco Italiano', 4500)">Agregar</button></div>
-        </div>
-
-        <h2 id="vienesas" class="seccion-titulo">Vienesas</h2>
-        <div class="grid">
-            <div class="card"><h3>Vienesa Italiana</h3><p>Tomate, palta y mayo.</p><span class="precio">$3.200</span><button class="btn-add" onclick="abrirMayo('Vienesa Italiana', 3200)">Agregar</button></div>
-        </div>
-
-        <h2 id="as" class="seccion-titulo">As</h2>
-        <div class="grid">
-            <div class="card"><h3>As Italiano</h3><p>Carne picada, tomate, palta y mayo.</p><span class="precio">$3.500</span><button class="btn-add" onclick="abrirMayo('As Italiano', 3500)">Agregar</button></div>
-        </div>
-
-        <h2 id="goliat" class="seccion-titulo">Goliat</h2>
-        <div class="grid">
-            <div class="card"><h3>Sándwich Goliat</h3><p>Triple carne, queso y huevo.</p><span class="precio">$9.990</span><button class="btn-add" onclick="abrirMayo('Sándwich Goliat', 9990)">Agregar</button></div>
-        </div>
-
-        <h2 id="picar" class="seccion-titulo">Para Picar</h2>
-        <div class="grid">
-            <div class="card"><h3>Papas Fritas XL</h3><p>Porción familiar de papas fritas.</p><span class="precio">$4.000</span><button class="btn-add" onclick="agregarDirecto('Papas XL', 4000)">Agregar</button></div>
-        </div>
-
-        <h2 id="veggie" class="seccion-titulo">Carta Veggie</h2>
-        <div class="grid">
-            <div class="card"><h3>Burger de Lentejas</h3><p>Vegetal, tomate, palta y mayo.</p><span class="precio">$5.200</span><button class="btn-add" onclick="abrirMayo('Burger Lentejas', 5200)">Agregar</button></div>
-        </div>
-
-        <h2 id="bebestibles" class="seccion-titulo">Bebestibles</h2>
-        <div class="grid">
-            <div class="card"><h3>Bebida Lata</h3><p>Coca, Fanta o Sprite 350ml.</p><span class="precio">$1.200</span><button class="btn-add" onclick="agregarDirecto('Bebida Lata', 1200)">Agregar</button></div>
-        </div>
-
-        <h2 id="junaeb" class="seccion-titulo">Menú JUNAEB</h2>
-        <div class="grid">
-            <div class="card"><h3>Promo JUNAEB</h3><p>Válido solo con tarjeta Pluxee.</p><span class="precio">$4.500</span><button class="btn-add" onclick="abrirMayo('Menú JUNAEB', 4500)">Agregar</button></div>
+        <div class="precio-box">
+            <h3>EXTRA</h3><span>$20.400</span><small>50 cm / 16 trozos</small>
         </div>
     </div>
 
-    <div id="cart-float" onclick="abrirCarrito()">
-        <i class="fas fa-shopping-cart"></i>
-        <span><span id="cart-count">0</span> productos</span>
-        <span>$ <span id="cart-total">0</span></span>
-    </div>
+    <h2>2. VARIEDADES DESTACADAS</h2>
+    <div class="pizza-card"><strong>CLÁSICA</strong><p>Jamón, Tomate, Aceituna</p></div>
+    <div class="pizza-card"><strong>CHACARERA</strong><p>Carne, Poroto Verde, Tomate, Choclo</p></div>
+    <div class="pizza-card"><strong>CHILENA</strong><p>Carne, Cebolla, Tomate, Aceituna, Doble Queso</p></div>
+    <div class="pizza-card"><strong>DIABLO</strong><p>Carne, Choricillo, Cebolla, Merquén (Picante)</p></div>
+    <div class="pizza-card"><strong>PIZZARON</strong><p>Carne, Choricillo, Tomate, Choclo</p></div>
 
-    <div id="modal-mayo" class="modal">
-        <div class="modal-content">
-            <h2 id="mayo-nombre" style="color:var(--amarillo)"></h2><br>
-            <label>Elige tu mayonesa:</label>
-            <select id="select-mayo">
-                <option value="Casera">Mayonesa Casera</option>
-                <option value="Envasada">Mayonesa Envasada</option>
-                <option value="Sin Mayo">Sin Mayonesa</option>
-            </select>
-            <button class="btn-confirm" onclick="confirmarAgregar()">AÑADIR</button>
+    <h2>3. ACOMPAÑAMIENTOS</h2>
+    <div class="item-simple"><span>Papas Fritas</span> <span>$3.900</span></div>
+    <div class="item-simple"><span>Pan de Ajo (4x)</span> <span>$3.900</span></div>
+    <div class="item-simple"><span>Pan de Ajo (8x)</span> <span>$6.900</span></div>
+
+    <div class="grid-dos">
+        <div>
+            <h2>4. BEBESTIBLES</h2>
+            <div class="item-simple"><span>Bebida 1.5 L</span> <span>$2.000</span></div>
+            <div class="item-simple"><span>Bebida Lata</span> <span>$1.500</span></div>
+        </div>
+        <div>
+            <h2>5. CERVEZAS</h2>
+            <div class="item-simple"><span>Shop 1/2 Lt</span> <span>$4.000</span></div>
+            <div class="item-simple"><span>Botella 330cc</span> <span>$3.000</span></div>
         </div>
     </div>
 
-    <div id="modal-carrito" class="modal">
-        <div class="modal-content">
-            <h2 style="color:var(--amarillo)">Tu Pedido</h2>
-            <div id="lista-carrito" style="margin: 15px 0; max-height: 180px; overflow-y: auto;"></div>
-            <input type="text" id="cliente-nombre" placeholder="Nombre para el retiro">
-            <select id="metodo-pago">
-                <option value="Efectivo">Efectivo</option>
-                <option value="Debito/Credito">Debito o Credito</option>
-                <option value="Transferencia">Transferencia</option>
-                <option value="Pluxee/JUNAEB">Pluxee (JUNAEB)</option>
-            </select>
-            <button class="btn-confirm" style="background:#25D366" onclick="enviarWhatsApp()">PEDIR POR WHATSAPP</button>
-            <button onclick="cerrarCarrito()" style="background:none; color:white; border:none; width:100%; margin-top:10px;">Cerrar</button>
-        </div>
-    </div>
+    <a href="index.html" class="btn-volver">← VOLVER AL INICIO</a>
 
-    <script>
-        let carrito = [];
-        let temp = null;
+    <p style="text-align: center; color: #666; font-size: 0.8rem; margin-top: 20px; margin-bottom: 40px;">
+        Pizzería PizzaRon Peñaflor
+    </p>
 
-        function abrirMayo(n, p) {
-            temp = { n, p };
-            document.getElementById('mayo-nombre').innerText = n;
-            document.getElementById('modal-mayo').style.display = 'flex';
-        }
+</div>
 
-        function agregarDirecto(n, p) {
-            carrito.push({ n, p, m: 'N/A' });
-            actualizar();
-        }
+<div class="call-footer">
+    <a href="tel:987443238" class="btn-call">📞 LLAMAR CEL: 9 8744 3238</a>
+    <a href="tel:225940389" class="btn-call secundario">📞 LLAMAR FIJO: 2 2594 0389</a>
+</div>
 
-        function confirmarAgregar() {
-            const m = document.getElementById('select-mayo').value;
-            carrito.push({ n: temp.n, p: temp.p, m: m });
-            document.getElementById('modal-mayo').style.display = 'none';
-            actualizar();
-        }
-
-        function actualizar() {
-            const t = carrito.reduce((s, i) => s + i.p, 0);
-            document.getElementById('cart-count').innerText = carrito.length;
-            document.getElementById('cart-total').innerText = t.toLocaleString('es-CL');
-        }
-
-        function abrirCarrito() {
-            const l = document.getElementById('lista-carrito');
-            l.innerHTML = '';
-            carrito.forEach(i => {
-                l.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <span>${i.n} (${i.m})</span><span>$${i.p.toLocaleString('es-CL')}</span>
-                </div>`;
-            });
-            document.getElementById('modal-carrito').style.display = 'flex';
-        }
-
-        function cerrarCarrito() { document.getElementById('modal-carrito').style.display = 'none'; }
-
-        function enviarWhatsApp() {
-            const nom = document.getElementById('cliente-nombre').value;
-            if(!nom) return alert("Por favor, ingresa tu nombre para el retiro");
-            if(carrito.length === 0) return alert("Tu carrito está vacío");
-
-            const pago = document.getElementById('metodo-pago').value;
-            
-            // --- LÓGICA DE AGRUPACIÓN ---
-            const carritoAgrupado = {};
-            
-            carrito.forEach(item => {
-                // Creamos una clave única que combine nombre y mayonesa
-                const clave = `${item.n}|${item.m}`;
-                if (carritoAgrupado[clave]) {
-                    carritoAgrupado[clave].cantidad += 1;
-                    carritoAgrupado[clave].subtotal += item.p;
-                } else {
-                    carritoAgrupado[clave] = {
-                        nombre: item.n,
-                        mayo: item.m,
-                        precioUnitario: item.p,
-                        cantidad: 1,
-                        subtotal: item.p
-                    };
-                }
-            });
-
-            // --- CONSTRUCCIÓN DEL MENSAJE ---
-            let msg = `*🍔 NUEVO PEDIDO PARA RETIRO 🍔*%0A`;
-            msg += `------------------------------------%0A`;
-            msg += `*Cliente:* ${nom}%0A`;
-            msg += `*Método de Pago:* ${pago}%0A`;
-            msg += `------------------------------------%0A%0A`;
-            msg += `*DETALLE DEL PEDIDO:*%0A`;
-            
-            for (const key in carritoAgrupado) {
-                const item = carritoAgrupado[key];
-                const infoMayo = item.mayo !== 'N/A' ? ` (Mayo: *${item.mayo}*)` : '';
-                msg += `✅ ${item.cantidad}x ${item.nombre}${infoMayo} - *$${item.subtotal.toLocaleString('es-CL')}*%0A`;
-            }
-            
-            const total = carrito.reduce((s, i) => s + i.p, 0);
-            
-            msg += `%0A------------------------------------%0A`;
-            msg += `*TOTAL A PAGAR:* $${total.toLocaleString('es-CL')}%0A`;
-            msg += `------------------------------------%0A`;
-            msg += `_Pedido realizado desde la web_`;
-
-            const miNumero = "56989217783"; // No olvides poner tu número aquí
-            window.open(`https://wa.me/${miNumero}?text=${msg}`, '_blank');
-        }
-
-
-    </script>
 </body>
 </html>
