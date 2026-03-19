@@ -3,177 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Tamaño Sí Importa | Inicio</title>
+    <title>Pizzería PizzaRon | Peñaflor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 🎨 PALETA DE COLORES PRINCIPAL */
-        :root {
-            --rojo: #E63946;
-            --amarillo: #FFC300;
-            --negro-fondo: #111111;
-            --negro-secundario: #1c1c1c;
-            --blanco: #FFFFFF;
+        :root { --negro: #0B0B0B; --rojo: #8B1E1E; --beige: #F5E6D3; --amarillo: #FFD700; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--negro); color: white; margin: 0; scroll-behavior: smooth; }
+        
+        /* BARRA DE NAVEGACIÓN CON INFO DE CONTACTO (SE MANTIENE) */
+        nav { 
+            background: #000; 
+            padding: 10px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--beige); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
         }
+        .logo-nav { height: 55px; }
+        .info-header { border-left: 1px solid #444; padding-left: 20px; display: none; }
+        @media (min-width: 768px) { .info-header { display: block; } }
+        
+        .menu-links a { color: var(--beige); text-decoration: none; font-family: 'Oswald'; margin-left: 20px; text-transform: uppercase; font-size: 0.9rem; font-weight: 700; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
-        body {
-            background-color: var(--negro-fondo);
-            color: var(--blanco);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            overflow: hidden;
+        /* HERO CON UN SOLO BOTÓN */
+        .hero { 
+            height: 65vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=2000'); 
+            background-size: cover; 
+            background-position: center;
         }
-
-        /* LOGO PRINCIPAL */
-        .logo-container {
-            margin-bottom: 30px;
-            animation: fadeIn 1.5s ease;
-        }
-        .logo-container img {
-            width: 180px; /* Ajusta según el tamaño de tu logo.png */
-            filter: drop-shadow(0 0 10px var(--rojo));
-        }
-
-        /* TEXTO DE BIENVENIDA */
-        h1 {
-            font-size: 2.2rem;
-            color: var(--blanco);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        h1 span {
-            color: var(--amarillo);
-        }
-        p {
-            color: #b3b3b3;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-        }
-
-        /* BOTONES DE ACCIÓN */
-        .btn-principal {
-            background-color: var(--rojo);
-            color: white;
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
+        .btn-pedido { 
+            background: transparent; 
+            color: var(--amarillo); 
+            padding: 18px 45px; 
+            text-decoration: none; 
+            font-family: 'Oswald'; 
+            border: 2px solid var(--amarillo); 
+            font-size: 1.3rem; 
             text-transform: uppercase;
             transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
-            border: 2px solid transparent;
         }
+        .btn-pedido:hover { background: var(--amarillo); color: black; }
 
-        .btn-principal:hover {
-            transform: scale(1.05);
-            background-color: #b92e3a;
-            border-color: var(--amarillo);
-        }
+        /* ENCUÉNTRANOS SIMPLIFICADO */
+        .encuentranos-container { padding: 80px 20px; text-align: center; }
+        .social-box { display: flex; justify-content: center; gap: 60px; }
+        .icon-circle { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 12px; transition: 0.3s; }
+        .icon-circle:hover { transform: scale(1.1); }
+        .fb { background: #3b5998; }
+        .ig { background: #d6249f; }
 
-        /* REDES SOCIALES O CONTACTO */
-        .social-links {
-            margin-top: 50px;
-            display: flex;
-            gap: 20px;
-        }
-        .social-links a {
-            color: var(--blanco);
-            font-size: 1.5rem;
-            transition: 0.3s;
-        }
-        .social-links a:hover {
-            color: var(--amarillo);
-        }
-
-        /* ANIMACIÓN */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* DECORACIÓN DE FONDO */
-        .overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(230,57,70,0.05) 0%, rgba(17,17,17,1) 80%);
-            z-index: -1;
-        }
+        /* SECCIÓN MAPA */
+        .map-section { background: #000; width: 100%; }
+        .map-header { padding: 15px 5%; background: #111; border-top: 1px solid #333; }
+        .btn-maps { background: transparent; color: white; border: 1px solid #555; padding: 7px 15px; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; }
+        .mapa-iframe { width: 100%; height: 450px; border: none; filter: grayscale(1) invert(0.92); }
     </style>
 </head>
 <body>
 
-    <div class="overlay"></div>
-
-    <div class="logo-container">
-        <img src="logo.png" alt="Logo El Tamaño Sí Importa">
-    </div>
-
-    <h1>BIENVENIDO A <br><span>EL TAMAÑO SÍ IMPORTA</span></h1>
-    <p>¿Listo para calmar el hambre?</p>
-
-<div style="background: var(--negro-secundario); padding: 20px; border-radius: 15px; border: 1px solid var(--rojo); margin: 20px auto 40px; max-width: 400px; animation: fadeIn 2s ease;">
-    <h3 style="color: var(--amarillo); font-size: 1rem; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">
-        <i class="far fa-clock"></i> Horarios de Atención
-    </h3>
-    
-    <div style="text-align: left; font-size: 0.9rem; line-height: 1.6;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px;">
-            <span><i class="fas fa-calendar-day" style="color: var(--rojo);"></i> Lun - Jue:</span>
-            <span style="font-weight: bold;">10:30 a 01:00</span>
+    <nav>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <a href="index.html"><img src="logo.png" class="logo-nav" alt="PizzaRon"></a>
+            <div class="info-header">
+                <div style="color: var(--amarillo); font-weight: bold; font-size: 0.9rem; font-family: 'Oswald';">
+                    📞 PEDIDOS: 9 8744 3238
+                </div>
+                <div style="color: #aaa; font-size: 0.7rem; text-transform: uppercase;">
+                    📍 PEÑAFLOR • PELVÍN • MALLOCO
+                </div>
+            </div>
         </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px;">
-            <span><i class="fas fa-star" style="color: var(--amarillo);"></i> Vie, Sáb y Vísperas:</span>
-            <span style="font-weight: bold;">10:30 a 02:00</span>
+
+        <div class="menu-links">
+            <a href="#">INICIO</a>
+            <a href="menu.html">MENÚ ONLINE</a>
+            <a href="#encuentranos">UBICACIÓN</a>
         </div>
-        <div style="display: flex; justify-content: space-between;">
-            <span><i class="fas fa-sun" style="color: var(--rojo);"></i> Domingo:</span>
-            <span style="font-weight: bold;">17:00 a 01:00</span>
+    </nav>
+
+    <section class="hero">
+        <a href="menu.html" class="btn-pedido">PEDIR AHORA ></a>
+    </section>
+
+    <section class="encuentranos-container" id="encuentranos">
+        <h2 style="font-family: 'Oswald'; font-size: 2.5rem; color: var(--beige); margin-bottom: 40px; text-transform: uppercase;">ENCUÉNTRANOS</h2>
+        
+        <div class="social-box">
+            <a href="https://facebook.com" class="social-item" style="text-decoration:none; color:white;">
+                <div class="icon-circle fb"><i class="fab fa-facebook-f"></i></div>
+                <span style="font-size: 0.8rem; color: #888; font-weight: 600;">FACEBOOK</span>
+            </a>
+            <a href="https://instagram.com" class="social-item" style="text-decoration:none; color:white;">
+                <div class="icon-circle ig"><i class="fab fa-instagram"></i></div>
+                <span style="font-size: 0.8rem; color: #888; font-weight: 600;">INSTAGRAM</span>
+            </a>
         </div>
-    </div>
-</div>
+    </section>
 
-    <a href="menu.html" class="btn-principal">
-        <i class="fas fa-utensils"></i> VER MENÚ COMPLETO
-    </a>
-
-<div class="social-links">
-        <a href="https://www.instagram.com/el_tamano_penaflor/" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
-
-        <a href="https://wa.me/56989217783" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-
-        <a href="https://www.google.com/maps/place/El+tamaño+si+importa/@-33.606888,-70.8774968,17z/data=!3m1!4b1!4m6!3m5!1s0x9662e6cc30d4ff1b:0x41770156e7142ef!8m2!3d-33.606888!4d-70.8749165!16s%2Fg%2F11clhqkw5g?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-            <i class="fas fa-map-marker-alt"></i>
-        </a>
+    <div class="map-section">
+        <div class="map-header">
+            <a href="https://maps.google.com" target="_blank" class="btn-maps">Abrir en Maps</a>
+        </div>
+        <iframe class="mapa-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.4567!2d-70.8789!3d-33.6067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDM2JzI0LjEiUyA3MMKwNTInNDQuMCJX!5e0!3m2!1ses!2scl!4v123456789"></iframe>
     </div>
 
-<footer style="background: #000; color: #b3b3b3; text-align: center; padding: 40px 20px; margin-top: 50px; border-top: 2px solid #E63946; padding-bottom: 160px;">
-    <div style="margin-bottom: 15px;">
-        <img src="logo.png" alt="Logo" style="height: 45px; opacity: 0.6; filter: grayscale(1);">
-    </div>
-    <p style="font-size: 0.9rem; margin-bottom: 8px; letter-spacing: 1px; color: #ffffff;">
-        © 2026 **EL TAMAÑO SÍ IMPORTA**
-    </p>
-    <p style="font-size: 0.75rem; color: #555; text-transform: uppercase;">
-        Peñaflor, Santiago Metropolitan Region
-    </p>
-    <div style="margin-top: 15px; font-size: 0.7rem; color: #444;">
-        <p>Calidad y sabor gigante en cada pedido.</p>
-    </div>
-</footer>
-    
 </body>
-</html> 
+</html>
